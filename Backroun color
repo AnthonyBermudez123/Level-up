@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiador de Color de Fondo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #mensaje {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="cambiarColor()">Cambiar Color</button>
+        <div id="mensaje">Color de fondo: </div>
+    </div>
+    <script>
+        function cambiarColor() {
+            // Generar colores aleatorios en formato hexadecimal
+            const color = '#' + Math.floor(Math.random()*16777215).toString(16);
+
+            // Cambiar el color de fondo
+            document.body.style.backgroundColor = color;
+
+            // Mostrar el mensaje con el color actual
+            document.getElementById('mensaje').innerText = 'Color de fondo: ' + color;
+        }
+    </script>
+</body>
+</html>
