@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador</title>
+ <text>Contador<text/>
+
+</head>
+
+  <style>
+
+    body {  
+      
+      text-align: center,White;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: black;
+    }
+
+    .contador {
+      text-align: center;
+    }
+
+    #contadorNumero {
+      color: #ece5e5;
+    }
+
+    .negativo {
+      color: red;
+    }
+
+    .positivo {
+      color: green;
+    }
+  </style>
+
+<body>
+
+<div class="contador">
+  <h1 id="contadorNumero">0</h1>
+  <a href="#" onclick="disminuir()">Disminuir</a>
+  <a href="#" onclick="reiniciar()">Reiniciar</a>
+  <a href="#" onclick="incrementar()">Incrementar</a>
+</div>
+
+<script>
+  let contador = 0;
+  const contadorNumero = document.getElementById('contadorNumero');
+
+  function actualizarColor() {
+    if (contador < 0) {
+      contadorNumero.classList.remove('positivo');
+      contadorNumero.classList.add('negativo');
+    } else if (contador > 0) {
+      contadorNumero.classList.remove('negativo');
+      contadorNumero.classList.add('positivo');
+    } else {
+      contadorNumero.classList.remove('negativo', 'positivo');
+    }
+  }
+
+  function disminuir() {
+    contador--;
+    actualizarColor();
+    contadorNumero.textContent = contador;
+  }
+
+  function reiniciar() {
+    contador = 0;
+    actualizarColor();
+    contadorNumero.textContent = contador;
+  }
+
+  function incrementar() {
+    contador++;
+    actualizarColor();
+    contadorNumero.textContent = contador;
+  }
+</script>
+
+</body>
+</html>
