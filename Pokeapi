@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .pokemon-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pokédex</h1>
+    <div id="pokedex-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Función para obtener datos de la API de PokeAPI
+            async function fetchData(url) {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data;
+            }
+
+            // Función para obtener un número aleatorio entre 1 y 898 (número total de Pokémon en la API)
+            function getRandomPokemonId() {
+                return Math.floor(Math.random() * 898) + 1;
+            }
+
+            // Función para cargar un grupo de seis Pokémon de manera aleatoria
+            async function loadRandomPokemonGroup() {
+                const pokedexContainer = document.getElementById('pokedex-container');
+                pokedexContainer.innerHTML = ''; 
+                // Limpiar el contenedor
+
+                for (let i = 0; i < 6; i++) {
+                    const randomPokemonId = getRandomPokemonId();
+                    const pokemonData = await fetchData(`https://pokeapi.co/api/v2/pokemon/${randomPokemonId}/`);
+
+                    // Crear tarjeta de Pokémon
+                    const pokemonCard = document.createElement('div');
+                    pokemonCard.classList.add('pokemon-card');
+                    pokemonCard.innerHTML = `
+                        <h2>${pokemonData.name}</h2>
+                        <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
+                        <p>Altura: ${pokemonData.height} dm</p>
+                        <p>Peso: ${pokemonData.weight} hg</p>
+                    `;
+
+                    // Agregar la tarjeta al contenedor
+                    pokedexContainer.appendChild(pokemonCard);
+                }
+            }
+
+            // Cargar un grupo de seis Pokémon al cargar la página
+            loadRandomPokemonGroup();
+
+            // Cargar un nuevo grupo de seis Pokémon al hacer clic en un botón (puedes cambiarlo a un evento de recarga de página)
+            document.addEventListener('click', function () {
+                loadRandomPokemonGroup();
+            });
+        });
+    </script>
+</body>
+</html>
